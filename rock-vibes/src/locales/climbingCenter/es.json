@@ -1,0 +1,27 @@
+{
+  "title": "CENTRO DE ESCALADA",
+  "subtitle": "ESCALAMOS POR TU VIDA EN LA MONTAÑA",
+  "description": "Experimenta una de las instalaciones de escalada más grandes y modernas del mundo. Con más de 2,000 metros cuadrados de espacio de escalada y boulder, ofrecemos rutas para todos los niveles.",
+  "services": [
+    {
+      "name": "ESCALADA",
+      "description": "Más de 200 rutas desde nivel principiante hasta experto"
+    },
+    {
+      "name": "BOULDER",
+      "description": "Área de boulder de clase mundial con rutas dinámicas"
+    },
+    {
+      "name": "ENTRENAMIENTO",
+      "description": "Área de entrenamiento dedicada con tablas de campus y hangboards"
+    },
+    {
+      "name": "CURSOS",
+      "description": "Instrucción profesional para todos los niveles"
+    },
+    {
+      "name": "BISTRO",
+      "description": "Comida saludable y refrescos para escaladores"
+    }
+  ]
+}

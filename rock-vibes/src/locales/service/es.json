@@ -1,0 +1,30 @@
+{
+  "title": "SERVICIO",
+  "subtitle": "¿CÓMO PODEMOS AYUDARTE?",
+  "items": [
+    {
+      "name": "APTO PARA PRINCIPIANTES",
+      "description": "Cursos de introducción y rutas fáciles para principiantes"
+    },
+    {
+      "name": "ENTRENAMIENTO PRO",
+      "description": "Programas de entrenamiento avanzado para escaladores competitivos"
+    },
+    {
+      "name": "PROGRAMAS PARA NIÑOS",
+      "description": "Actividades de escalada seguras y divertidas para niños"
+    },
+    {
+      "name": "RESERVAS GRUPALES",
+      "description": "Tarifas especiales para grupos y team building"
+    },
+    {
+      "name": "TIENDA PRO",
+      "description": "Equipamiento y material de escalada premium"
+    },
+    {
+      "name": "EVENTOS ESPECIALES",
+      "description": "Competiciones, talleres y reuniones comunitarias"
+    }
+  ]
+}

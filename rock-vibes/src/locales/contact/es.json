@@ -1,0 +1,36 @@
+{
+  "title": "CONTACTO",
+  "subtitle": "PONTE EN CONTACTO CON NOSOTROS",
+  "form": {
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "send": "ENVIAR MENSAJE",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "tu{'@'}email.com",
+    "phonePlaceholder": "+34 123 456 789",
+    "messagePlaceholder": "Cuéntanos cómo podemos ayudarte..."
+  },
+  "info": {
+    "address": {
+      "title": "DIRECCIÓN",
+      "line1": "Calle Licenciado Poza, 45",
+      "line2": "48013 Bilbao, España"
+    },
+    "phone": {
+      "title": "TELÉFONO",
+      "number": "+34 944 123 456"
+    },
+    "email": {
+      "title": "EMAIL",
+      "address": "info{'@'}rockvibes-bilbao.com"
+    },
+    "hours": {
+      "title": "HORARIO DE APERTURA",
+      "weekdays": "Lun-Vie: 10:00 - 22:00",
+      "weekends": "Sáb-Dom: 9:00 - 21:00",
+      "holidays": "Festivos: 10:00 - 19:00"
+    }
+  }
+}

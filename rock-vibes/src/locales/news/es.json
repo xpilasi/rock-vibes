@@ -1,0 +1,36 @@
+{
+  "title": "NOTICIAS",
+  "subtitle": "EN EL CENTRO DE ESCALADA ROCKVIBES",
+  "items": [
+    {
+      "date": "5 de noviembre, 2024",
+      "title": "Apertura de Temporada de Invierno",
+      "excerpt": "Únete a nosotros para la apertura oficial de la temporada de invierno con eventos especiales de escalada y competiciones."
+    },
+    {
+      "date": "1 de noviembre, 2024",
+      "title": "Nuevas Rutas de Boulder",
+      "excerpt": "Explora nuestras rutas de boulder recién diseñadas creadas por equipadores de clase mundial."
+    },
+    {
+      "date": "28 de octubre, 2024",
+      "title": "Programa de Entrenamiento Profesional",
+      "excerpt": "Inscríbete en nuestro programa de entrenamiento avanzado diseñado para escaladores competitivos."
+    },
+    {
+      "date": "25 de octubre, 2024",
+      "title": "Campamento de Escalada para Niños",
+      "excerpt": "Campamento especial de escalada para niños durante la temporada de vacaciones. Plazas limitadas."
+    },
+    {
+      "date": "20 de octubre, 2024",
+      "title": "Venta de Equipamiento",
+      "excerpt": "Obtén hasta un 30% de descuento en equipamiento y material de escalada seleccionado en nuestra tienda."
+    },
+    {
+      "date": "15 de octubre, 2024",
+      "title": "Actualización del Menú del Bistro",
+      "excerpt": "Nuevos elementos del menú de temporada disponibles en Rock Vibes Bistro. Opciones frescas y saludables para escaladores."
+    }
+  ]
+}

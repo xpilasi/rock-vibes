@@ -1,0 +1,30 @@
+{
+  "title": "SERVICE",
+  "subtitle": "HOW CAN WE HELP YOU?",
+  "items": [
+    {
+      "name": "BEGINNER FRIENDLY",
+      "description": "Introduction courses and easy routes for first-timers"
+    },
+    {
+      "name": "PRO TRAINING",
+      "description": "Advanced training programs for competitive climbers"
+    },
+    {
+      "name": "KIDS PROGRAMS",
+      "description": "Safe and fun climbing activities for children"
+    },
+    {
+      "name": "GROUP BOOKINGS",
+      "description": "Special rates for groups and team building"
+    },
+    {
+      "name": "PRO SHOP",
+      "description": "Premium climbing gear and equipment"
+    },
+    {
+      "name": "SPECIAL EVENTS",
+      "description": "Competitions, workshops, and community gatherings"
+    }
+  ]
+}

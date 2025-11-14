@@ -1,0 +1,27 @@
+{
+  "title": "CLIMBING CENTER",
+  "subtitle": "WE CLIMB FOR YOUR MOUNTAIN LIFE",
+  "description": "Experience one of the world's largest and most modern climbing facilities. With over 2,000 square meters of climbing and bouldering space, we offer routes for all skill levels.",
+  "services": [
+    {
+      "name": "CLIMBING",
+      "description": "Over 200 routes from beginner to expert level"
+    },
+    {
+      "name": "BOULDERING",
+      "description": "World-class bouldering area with dynamic routes"
+    },
+    {
+      "name": "TRAINING",
+      "description": "Dedicated training area with campus boards and hangboards"
+    },
+    {
+      "name": "COURSES",
+      "description": "Professional instruction for all levels"
+    },
+    {
+      "name": "BISTRO",
+      "description": "Healthy food and refreshments for climbers"
+    }
+  ]
+}

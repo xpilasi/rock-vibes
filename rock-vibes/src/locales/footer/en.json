@@ -1,0 +1,47 @@
+{
+  "tagline": "Indoor climbing. Outdoor spirit.",
+  "columns": {
+    "hours": {
+      "title": "OPENING HOURS",
+      "items": [
+        "Mon-Fri: 10:00 - 22:00",
+        "Sat-Sun: 9:00 - 21:00",
+        "",
+        "Public Holidays: 10:00 - 19:00"
+      ]
+    },
+    "contact": {
+      "title": "CONTACT",
+      "items": [
+        "Calle Licenciado Poza, 45",
+        "48013 Bilbao, Spain",
+        "",
+        "+34 944 123 456",
+        "info{'@'}rockvibes-bilbao.com"
+      ]
+    },
+    "links": {
+      "title": "QUICK LINKS",
+      "items": [
+        { "name": "About Us", "href": "#" },
+        { "name": "Pricing", "href": "#" },
+        { "name": "Schedule", "href": "#" },
+        { "name": "Safety Rules", "href": "#" },
+        { "name": "FAQ", "href": "#" },
+        { "name": "Newsletter", "href": "#" }
+      ]
+    },
+    "social": {
+      "title": "FOLLOW US"
+    }
+  },
+  "partners": {
+    "title": "Our Partners"
+  },
+  "copyright": "© 2024 Rock Vibes Climbing Center. All rights reserved.",
+  "legal": [
+    { "name": "Privacy Policy", "href": "#" },
+    { "name": "Terms of Service", "href": "#" },
+    { "name": "Cookie Policy", "href": "#" }
+  ]
+}

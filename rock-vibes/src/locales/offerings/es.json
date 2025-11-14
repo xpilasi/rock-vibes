@@ -1,0 +1,26 @@
+{
+  "title": "OFERTAS",
+  "subtitle": "¿QUÉ HAY PARA TI?",
+  "items": [
+    {
+      "name": "MEMBRESÍAS",
+      "description": "Opciones flexibles de membresía para todos los escaladores"
+    },
+    {
+      "name": "PASES DE DÍA",
+      "description": "Acceso de un día a todas las instalaciones"
+    },
+    {
+      "name": "EQUIPAMIENTO",
+      "description": "Alquiler de equipamiento y tienda profesional"
+    },
+    {
+      "name": "ENTRENAMIENTO PERSONAL",
+      "description": "Coaching personalizado con instructores certificados"
+    },
+    {
+      "name": "EVENTOS PRIVADOS",
+      "description": "Reserva la instalación para eventos corporativos y fiestas"
+    }
+  ]
+}

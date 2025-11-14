@@ -1,0 +1,47 @@
+{
+  "tagline": "Escalada interior. Espíritu exterior.",
+  "columns": {
+    "hours": {
+      "title": "HORARIO DE APERTURA",
+      "items": [
+        "Lun-Vie: 10:00 - 22:00",
+        "Sáb-Dom: 9:00 - 21:00",
+        "",
+        "Festivos: 10:00 - 19:00"
+      ]
+    },
+    "contact": {
+      "title": "CONTACTO",
+      "items": [
+        "Calle Licenciado Poza, 45",
+        "48013 Bilbao, España",
+        "",
+        "+34 944 123 456",
+        "info{'@'}rockvibes-bilbao.com"
+      ]
+    },
+    "links": {
+      "title": "ENLACES RÁPIDOS",
+      "items": [
+        { "name": "Sobre Nosotros", "href": "#" },
+        { "name": "Precios", "href": "#" },
+        { "name": "Horarios", "href": "#" },
+        { "name": "Normas de Seguridad", "href": "#" },
+        { "name": "FAQ", "href": "#" },
+        { "name": "Newsletter", "href": "#" }
+      ]
+    },
+    "social": {
+      "title": "SÍGUENOS"
+    }
+  },
+  "partners": {
+    "title": "Nuestros Socios"
+  },
+  "copyright": "© 2024 Rock Vibes Centro de Escalada. Todos los derechos reservados.",
+  "legal": [
+    { "name": "Política de Privacidad", "href": "#" },
+    { "name": "Términos de Servicio", "href": "#" },
+    { "name": "Política de Cookies", "href": "#" }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "title": "OFFERINGS",
+  "subtitle": "WHAT'S IN IT FOR YOU?",
+  "items": [
+    {
+      "name": "MEMBERSHIPS",
+      "description": "Flexible membership options for all climbers"
+    },
+    {
+      "name": "DAY PASSES",
+      "description": "Single day access to all facilities"
+    },
+    {
+      "name": "EQUIPMENT",
+      "description": "Rental equipment and pro shop"
+    },
+    {
+      "name": "PERSONAL TRAINING",
+      "description": "One-on-one coaching with certified instructors"
+    },
+    {
+      "name": "PRIVATE EVENTS",
+      "description": "Book the facility for corporate events and parties"
+    }
+  ]
+}
