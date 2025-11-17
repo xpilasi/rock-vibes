@@ -4,7 +4,33 @@
       <SectionTitle :title="news.title" :subtitle="news.subtitle" />
 
       <div class="relative">
+        <!-- Show skeleton loaders while loading or no data -->
         <Swiper
+          v-if="news.loading || news.items.length === 0"
+          :modules="modules"
+          :slides-per-view="1"
+          :space-between="32"
+          :pagination="{ clickable: true }"
+          :breakpoints="{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 24,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 32,
+            },
+          }"
+          class="news-swiper"
+        >
+          <SwiperSlide v-for="index in 5" :key="'skeleton-' + index">
+            <NewsSkeletonLoader />
+          </SwiperSlide>
+        </Swiper>
+
+        <!-- Show actual news items when loaded -->
+        <Swiper
+          v-else
           :modules="modules"
           :slides-per-view="1"
           :space-between="32"
@@ -44,12 +70,14 @@ import 'swiper/css/pagination'
 
 import SectionTitle from '../components/ui/SectionTitle.vue'
 import NewsCard from '../components/cards/NewsCard.vue'
+import NewsSkeletonLoader from '../components/loaders/NewsSkeletonLoader.vue'
 
 export default {
   name: 'NewsSection',
   components: {
     SectionTitle,
     NewsCard,
+    NewsSkeletonLoader,
     Swiper,
     SwiperSlide
   },

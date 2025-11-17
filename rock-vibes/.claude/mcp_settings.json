@@ -9,10 +9,10 @@
     },
     "strapi": {
       "command": "npx",
-      "args": ["-y", "strapi-mcp-server"],
+      "args": ["-y", "strapi-mcp"],
       "env": {
         "STRAPI_URL": "http://localhost:1337",
-        "STRAPI_API_TOKEN": "2c4ed9f675c0c1f39b470bdbcc7c3aaa81366f4c12a363e3a0b8746d9a854ffa862e87eea1bdc4791a1a16889191e0aa9bb68befc025a835f6039ee52d02af8521ffa1d5d156b0fb13b8d06e2008abdfd580059d8c9b138d4906ad5e59cb630b7b9d090e0953793240899ba558f25d6020e2ca5698ae94d356b5eb36a8bc7dae"
+        "STRAPI_API_TOKEN": "fe9bce7cfd29953af619b4b6a08cc96c2346e3bab3099ef39052026f42f6f6fcc2e2378aec96d8fa8b5776de91537a4a2d4cbfbc6b0f639cac4f6f9b66baa61e437842942e486598b3dc854910f73d868835492ae59da414def69cb8bcac64979fdfc102d38c8e7f607e5bc8b0b5fb94560c918b5750d3bb1788fe4429b23724"
       }
     }
     

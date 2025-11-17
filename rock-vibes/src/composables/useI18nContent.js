@@ -1,4 +1,6 @@
 import { useI18n } from 'vue-i18n'
+import { ref, watch, onMounted, computed } from 'vue'
+import { getNews } from '@/services/strapi'
 import gearImage from '@/assets/images/news/gear.jpg'
 import routesImage from '@/assets/images/news/routes.jpg'
 import trainingImage from '@/assets/images/news/training.jpg'
@@ -14,16 +16,120 @@ import petzlLogo from '@/assets/images/partners/petzl.png'
 import logoFooter from '@/assets/images/partners/logo_footer.png'
 
 export function useI18nContent() {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
-  const navigation = [
+  // Estado reactivo para noticias
+  const newsItems = ref([])
+  const newsLoading = ref(true)
+  const newsError = ref(null)
+
+  // Datos estáticos de fallback para noticias
+  const staticNewsItems = [
+    {
+      id: 1,
+      image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&auto=format&fit=crop',
+      date: t('news.items[0].date'),
+      title: t('news.items[0].title'),
+      excerpt: t('news.items[0].excerpt'),
+      link: '#'
+    },
+    {
+      id: 2,
+      image: routesImage,
+      date: t('news.items[1].date'),
+      title: t('news.items[1].title'),
+      excerpt: t('news.items[1].excerpt'),
+      link: '#'
+    },
+    {
+      id: 3,
+      image: trainingImage,
+      date: t('news.items[2].date'),
+      title: t('news.items[2].title'),
+      excerpt: t('news.items[2].excerpt'),
+      link: '#'
+    },
+    {
+      id: 4,
+      image: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800&auto=format&fit=crop',
+      date: t('news.items[3].date'),
+      title: t('news.items[3].title'),
+      excerpt: t('news.items[3].excerpt'),
+      link: '#'
+    },
+    {
+      id: 5,
+      image: gearImage,
+      date: t('news.items[4].date'),
+      title: t('news.items[4].title'),
+      excerpt: t('news.items[4].excerpt'),
+      link: '#'
+    },
+    {
+      id: 6,
+      image: routesImage,
+      date: t('news.items[5].date'),
+      title: t('news.items[5].title'),
+      excerpt: t('news.items[5].excerpt'),
+      link: '#'
+    }
+  ]
+
+  // Función para cargar noticias desde Strapi
+  const loadNews = async () => {
+    newsLoading.value = true
+    newsError.value = null
+
+    try {
+      const data = await getNews(locale.value)
+
+      // Si Strapi devuelve datos, usarlos
+      if (data && data.length > 0) {
+        newsItems.value = data.map(item => ({
+          id: item.id,
+          image: item.image ? `${import.meta.env.VITE_STRAPI_URL}${item.image}` : null,
+          date: new Date(item.date).toLocaleDateString(locale.value === 'es' ? 'es-ES' : 'en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }),
+          title: item.title,
+          excerpt: item.excerpt,
+          slug: item.slug,
+          link: `/news/${item.slug}`
+        }))
+      } else {
+        // Si no hay datos, mantener array vacío para mostrar skeleton
+        newsItems.value = []
+      }
+    } catch (error) {
+      console.error('Error loading news from Strapi:', error)
+      newsError.value = error
+      // En caso de error, mantener array vacío para mostrar skeleton
+      newsItems.value = []
+    } finally {
+      newsLoading.value = false
+    }
+  }
+
+  // Cargar noticias al montar el componente
+  onMounted(() => {
+    loadNews()
+  })
+
+  // Recargar noticias cuando cambie el idioma
+  watch(locale, () => {
+    loadNews()
+  })
+
+  const navigation = computed(() => [
     { name: t('header.navigation.climbingGym'), href: '#climbing-gym' },
     { name: t('header.navigation.offerings'), href: '#offerings' },
     { name: t('header.navigation.service'), href: '#service' },
     { name: t('header.navigation.contact'), href: '#contact' }
-  ]
+  ])
 
-  const hero = {
+  const hero = computed(() => ({
     title: '',
     tagline: t('hero.tagline'),
     cta: t('hero.cta'),
@@ -33,64 +139,17 @@ export function useI18nContent() {
       '/images/StockCake-climbing_center_Images_and_Photos_1762782894.jpg',
       '/images/StockCake-climbing_center_Images_and_Photos_1762782911.jpg'
     ]
-  }
+  }))
 
-  const news = {
+  const news = computed(() => ({
     title: t('news.title'),
     subtitle: t('news.subtitle'),
-    items: [
-      {
-        id: 1,
-        image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&auto=format&fit=crop',
-        date: t('news.items[0].date'),
-        title: t('news.items[0].title'),
-        excerpt: t('news.items[0].excerpt'),
-        link: '#'
-      },
-      {
-        id: 2,
-        image: routesImage,
-        date: t('news.items[1].date'),
-        title: t('news.items[1].title'),
-        excerpt: t('news.items[1].excerpt'),
-        link: '#'
-      },
-      {
-        id: 3,
-        image: trainingImage,
-        date: t('news.items[2].date'),
-        title: t('news.items[2].title'),
-        excerpt: t('news.items[2].excerpt'),
-        link: '#'
-      },
-      {
-        id: 4,
-        image: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800&auto=format&fit=crop',
-        date: t('news.items[3].date'),
-        title: t('news.items[3].title'),
-        excerpt: t('news.items[3].excerpt'),
-        link: '#'
-      },
-      {
-        id: 5,
-        image: gearImage,
-        date: t('news.items[4].date'),
-        title: t('news.items[4].title'),
-        excerpt: t('news.items[4].excerpt'),
-        link: '#'
-      },
-      {
-        id: 6,
-        image: routesImage,
-        date: t('news.items[5].date'),
-        title: t('news.items[5].title'),
-        excerpt: t('news.items[5].excerpt'),
-        link: '#'
-      }
-    ]
-  }
+    items: newsItems.value,
+    loading: newsLoading.value,
+    error: newsError.value
+  }))
 
-  const climbingCenter = {
+  const climbingCenter = computed(() => ({
     title: t('climbingCenter.title'),
     subtitle: t('climbingCenter.subtitle'),
     description: t('climbingCenter.description'),
@@ -126,9 +185,9 @@ export function useI18nContent() {
         description: t('climbingCenter.services[4].description')
       }
     ]
-  }
+  }))
 
-  const offerings = {
+  const offerings = computed(() => ({
     title: t('offerings.title'),
     subtitle: t('offerings.subtitle'),
     items: [
@@ -173,9 +232,9 @@ export function useI18nContent() {
         link: '#'
       }
     ]
-  }
+  }))
 
-  const service = {
+  const service = computed(() => ({
     title: t('service.title'),
     subtitle: t('service.subtitle'),
     items: [
@@ -222,9 +281,9 @@ export function useI18nContent() {
         link: '#'
       }
     ]
-  }
+  }))
 
-  const gallery = {
+  const gallery = computed(() => ({
     title: t('gallery.title'),
     subtitle: t('gallery.subtitle'),
     images: [
@@ -237,9 +296,9 @@ export function useI18nContent() {
       { id: 7, src: '/images/gallery-7.jpg', alt: 'Climbing 7' },
       { id: 8, src: '/images/gallery-8.jpg', alt: 'Climbing 8' }
     ]
-  }
+  }))
 
-  const contact = {
+  const contact = computed(() => ({
     title: t('contact.title'),
     subtitle: t('contact.subtitle'),
     form: {
@@ -271,9 +330,9 @@ export function useI18nContent() {
     map: {
       embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.123456789!2d-2.9349473!3d43.2627124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE1JzQ1LjgiTiAywrA1NicwNS44Ilc!5e0!3m2!1sen!2ses!4v1234567890123!5m2!1sen!2ses'
     }
-  }
+  }))
 
-  const footer = {
+  const footer = computed(() => ({
     tagline: t('footer.tagline'),
     columns: {
       hours: {
@@ -330,7 +389,7 @@ export function useI18nContent() {
       { name: t('footer.legal[1].name'), href: '#' },
       { name: t('footer.legal[2].name'), href: '#' }
     ]
-  }
+  }))
 
   return {
     navigation,
