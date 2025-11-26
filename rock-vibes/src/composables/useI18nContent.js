@@ -85,19 +85,27 @@ export function useI18nContent() {
 
       // Si Strapi devuelve datos, usarlos
       if (data && data.length > 0) {
-        newsItems.value = data.map(item => ({
-          id: item.id,
-          image: item.image ? `${import.meta.env.VITE_STRAPI_URL}${item.image}` : null,
-          date: new Date(item.date).toLocaleDateString(locale.value === 'es' ? 'es-ES' : 'en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }),
-          title: item.title,
-          excerpt: item.excerpt,
-          slug: item.slug,
-          link: `/news/${item.slug}`
-        }))
+        newsItems.value = data.map(item => {
+          // Si la URL ya es absoluta (comienza con http), usarla directamente
+          // Si es relativa (comienza con /), concatenarla con VITE_STRAPI_URL
+          const imageUrl = item.image
+            ? (item.image.startsWith('http') ? item.image : `${import.meta.env.VITE_STRAPI_URL}${item.image}`)
+            : null
+
+          return {
+            id: item.id,
+            image: imageUrl,
+            date: new Date(item.date).toLocaleDateString(locale.value === 'es' ? 'es-ES' : 'en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            title: item.title,
+            excerpt: item.excerpt,
+            slug: item.slug,
+            link: `/news/${item.slug}`
+          }
+        })
       } else {
         // Si no hay datos, mantener array vacío para mostrar skeleton
         newsItems.value = []
