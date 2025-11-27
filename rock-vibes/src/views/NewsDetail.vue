@@ -59,9 +59,9 @@
         </header>
 
         <!-- Featured Image -->
-        <div v-if="newsItem.image" class="relative aspect-video rounded-lg bg-red-200 h-[200px] w-full overflow-hidden shadow-card mb-8">
+        <div v-if="imageUrl" class="relative aspect-video rounded-lg bg-red-200 h-[200px] w-full overflow-hidden shadow-card mb-8">
           <img
-            :src="newsItem.image ? `${strapiUrl}${newsItem.image}` : null"
+            :src="imageUrl"
             :alt="newsItem.title"
             class="w-full object-cover object-center"
           />
@@ -122,6 +122,15 @@ export default {
       )
     })
 
+    const imageUrl = computed(() => {
+      if (!newsItem.value?.image) return null
+      // Si la URL ya es absoluta (comienza con http), usarla directamente
+      // Si es relativa (comienza con /), concatenarla con strapiUrl
+      return newsItem.value.image.startsWith('http')
+        ? newsItem.value.image
+        : `${strapiUrl}${newsItem.value.image}`
+    })
+
     const loadNews = async () => {
       loading.value = true
       error.value = null
@@ -154,6 +163,7 @@ export default {
       loading,
       error,
       formattedDate,
+      imageUrl,
       strapiUrl
     }
   }
