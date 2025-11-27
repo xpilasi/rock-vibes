@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "render": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://mcp.render.com/mcp",
+        "--header",
+        "Authorization: Bearer ${RENDER_API_KEY}"
+      ],
+      "env": {
+        "RENDER_API_KEY": "rnd_AiHca6ZJjQnmdOHWRbTpB4dDcQR5"
+      }
+    },
+ 
+    
+    "supabase": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-supabase"],
+      "env": {
+        "SUPABASE_URL": "https://supabase.com/dashboard/project/jyhwshghybizzluurnqe",
+        "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5aHdzaGdoeWJpenpsdXVybnFlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzI1ODMwOSwiZXhwIjoyMDc4ODM0MzA5fQ._syy4r1BevqatHl40HPyfym62v55pgEXtM-tqWAPvw4"
+      }
+    }
+   
+  }
+}

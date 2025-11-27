@@ -224,7 +224,14 @@ export default {
     changeLanguage(lang) {
       this.currentLocale = lang
       localStorage.setItem('locale', lang)
-      window.location.reload()
+
+      // Si estamos en una página de detalle, navegar al home
+      // Si estamos en home, recargar para aplicar el cambio de idioma
+      if (this.$route && this.$route.path !== '/') {
+        this.$router.push('/')
+      } else {
+        window.location.reload()
+      }
     }
   }
 }

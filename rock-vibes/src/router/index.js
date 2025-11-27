@@ -9,7 +9,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/news/:documentId',
+    path: '/news/:slug',
     name: 'NewsDetail',
     component: NewsDetail,
     props: true

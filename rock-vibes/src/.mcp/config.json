@@ -1,0 +1,24 @@
+{
+    "mcpServers": {
+      "render": {
+        "command": "npx",
+        "args": ["-y", "@render-oss/render-mcp-server"],
+        "env": {
+          "RENDER_API_KEY": "rnd_AiHca6ZJjQnmdOHWRbTpB4dDcQR5"
+        }
+      },
+      "strapi": {
+        "command": "npx",
+        "args": ["-y", "strapi-mcp"],
+        "env": {
+          "STRAPI_URL": "http://localhost:1337",
+          "STRAPI_API_TOKEN": "fe9bce7cfd29953af619b4b6a08cc96c2346e3bab3099ef39052026f42f6f6fcc2e2378aec96d8fa8b5776de91537a4a2d4cbfbc6b0f639cac4f6f9b66baa61e437842942e486598b3dc854910f73d868835492ae59da414def69cb8bcac64979fdfc102d38c8e7f607e5bc8b0b5fb94560c918b5750d3bb1788fe4429b23724"
+        }
+      }
+   
+     
+     
+    }
+  }
+  
+  
