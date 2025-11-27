@@ -94,7 +94,7 @@
 
 <script>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getNewsByDocumentId } from '../services/strapi'
 
@@ -102,6 +102,7 @@ export default {
   name: 'NewsDetail',
   setup() {
     const route = useRoute()
+    const router = useRouter()
     const { locale } = useI18n()
 
     const newsItem = ref(null)
@@ -158,9 +159,9 @@ export default {
       loadNews()
     })
 
-    // Recargar noticia cuando cambie el idioma
+    // Redirigir al home cuando cambie el idioma
     watch(locale, () => {
-      loadNews()
+      router.push('/')
     })
 
     return {
