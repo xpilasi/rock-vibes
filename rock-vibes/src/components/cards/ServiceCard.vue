@@ -1,10 +1,17 @@
 <template>
   <div
-    class="relative flex flex-col justify-end p-6! rounded-lg overflow-hidden group min-h-[300px] transition-transform duration-300 hover:scale-105"
+    class="relative cursor-pointer flex flex-col justify-end p-6! rounded-lg overflow-hidden group min-h-[300px] transition-transform duration-300 hover:scale-105"
     :style="backgroundStyle"
   >
     <!-- Gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-300 group-hover:from-black/90"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/30 to-black/90  transition-opacity duration-300 group-hover:from-black/90"></div>
+
+    <!-- Favicon SVG en esquina superior derecha -->
+    <img
+      :src="faviconSvg"
+      alt="Rock Vibes"
+      class="absolute top-4 right-4 w-8 h-8 opacity-100 transition-opacity duration-300 group-hover:opacity-60 z-10"
+    />
 
     <!-- Content -->
     <div class="relative z-10">
@@ -19,6 +26,8 @@
 </template>
 
 <script>
+import faviconSvg from '@/assets/images/favicon-rock-vibes.svg'
+
 export default {
   name: 'ServiceCard',
   props: {
@@ -33,6 +42,11 @@ export default {
     description: {
       type: String,
       required: true
+    }
+  },
+  data() {
+    return {
+      faviconSvg
     }
   },
   computed: {
