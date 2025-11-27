@@ -96,7 +96,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { getNewsBySlug } from '../services/strapi'
+import { getNewsByDocumentId } from '../services/strapi'
 
 export default {
   name: 'NewsDetail',
@@ -136,8 +136,8 @@ export default {
       error.value = null
 
       try {
-        const slug = route.params.slug
-        const data = await getNewsBySlug(slug, locale.value)
+        const documentId = route.params.documentId
+        const data = await getNewsByDocumentId(documentId, locale.value)
 
         if (!data) {
           error.value = 'News not found'

@@ -94,6 +94,7 @@ export function useI18nContent() {
 
           return {
             id: item.id,
+            documentId: item.documentId,
             image: imageUrl,
             date: new Date(item.date).toLocaleDateString(locale.value === 'es' ? 'es-ES' : 'en-US', {
               year: 'numeric',
@@ -103,7 +104,7 @@ export function useI18nContent() {
             title: item.title,
             excerpt: item.excerpt,
             slug: item.slug,
-            link: `/news/${item.slug}`
+            link: `/news/${item.documentId}`
           }
         })
       } else {

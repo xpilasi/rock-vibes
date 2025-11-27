@@ -79,6 +79,22 @@ export const getNewsBySlug = async (slug, locale = 'en') => {
   }
 }
 
+// Get single news by documentId (works across all locales)
+export const getNewsByDocumentId = async (documentId, locale = 'en') => {
+  try {
+    const response = await api.get(`/plural-news/${documentId}`, {
+      params: {
+        locale,
+        populate: '*'
+      }
+    })
+    return extractData(response)
+  } catch (error) {
+    console.error('Error fetching news by documentId:', error)
+    throw error
+  }
+}
+
 // Gallery Images
 export const getGalleryImages = async () => {
   try {
