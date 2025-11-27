@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getNewsBySlug } from '../services/strapi'
@@ -155,6 +155,11 @@ export default {
     }
 
     onMounted(() => {
+      loadNews()
+    })
+
+    // Recargar noticia cuando cambie el idioma
+    watch(locale, () => {
       loadNews()
     })
 
