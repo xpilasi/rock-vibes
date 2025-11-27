@@ -6,13 +6,13 @@
     <div class="container-custom">
       <nav class="flex items-center justify-between h-20 md:h-20">
         <!-- Logo -->
-        <a href="#" class="flex items-center">
+        <router-link to="/" class="flex items-center">
           <img
             :src="currentLogo"
             alt="Rock Vibes"
             class="h-12 md:h-14 w-auto transition-opacity duration-300"
           />
-        </a>
+        </router-link>
 
         <!-- Desktop Navigation -->
         <div class="hidden lg:flex items-center gap-8">
@@ -191,14 +191,34 @@ export default {
       this.scrollToSection(href)
     },
     scrollToSection(href) {
-      const target = document.querySelector(href)
-      if (target) {
-        const headerHeight = 80
-        const targetPosition = target.offsetTop - headerHeight
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
+      // Si estamos en la página de detalle de noticia, primero ir al home
+      if (this.$route && this.$route.path !== '/') {
+        // Guardar el hash para usarlo después de navegar
+        this.$router.push({ path: '/', hash: href }).then(() => {
+          // Esperar a que la navegación termine y el DOM se actualice
+          this.$nextTick(() => {
+            const target = document.querySelector(href)
+            if (target) {
+              const headerHeight = 80
+              const targetPosition = target.offsetTop - headerHeight
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              })
+            }
+          })
         })
+      } else {
+        // Ya estamos en home, solo hacer scroll
+        const target = document.querySelector(href)
+        if (target) {
+          const headerHeight = 80
+          const targetPosition = target.offsetTop - headerHeight
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          })
+        }
       }
     },
     changeLanguage(lang) {
