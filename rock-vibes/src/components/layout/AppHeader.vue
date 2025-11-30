@@ -32,7 +32,7 @@
             <span
               v-if="item.name !== 'CONTACT' && item.name !== 'CONTACTO'"
               class="absolute left-0 -bottom-1 w-0 h-[3px] transition-all duration-700 group-hover:w-full"
-              :class="isScrolled ? 'bg-(--ki-secondary)' : 'bg-white'"
+              :class="shouldUseDarkTheme ? 'bg-(--ki-secondary)' : 'bg-white'"
             ></span>
           </a>
 
@@ -43,20 +43,20 @@
               :class="[
                 'text-sm font-heading font-semibold tracking-wider transition-all duration-300',
                 currentLocale === 'en'
-                  ? (isScrolled ? 'text-(--ki-yellow)' : 'text-(--ki-yellow)')
-                  : (isScrolled ? 'text-(--ki-black) hover:text-(--ki-secondary)' : 'text-white/70 hover:text-white')
+                  ? (shouldUseDarkTheme ? 'text-(--ki-yellow)' : 'text-(--ki-yellow)')
+                  : (shouldUseDarkTheme ? 'text-(--ki-black) hover:text-(--ki-secondary)' : 'text-white/70 hover:text-white')
               ]"
             >
               EN
             </button>
-            <span :class="isScrolled ? 'text-(--ki-black)' : 'text-white'">/</span>
+            <span :class="shouldUseDarkTheme ? 'text-(--ki-black)' : 'text-white'">/</span>
             <button
               @click="changeLanguage('es')"
               :class="[
                 'text-sm font-heading font-semibold tracking-wider transition-all duration-300',
                 currentLocale === 'es'
-                  ? (isScrolled ? 'text-(--ki-yellow)' : 'text-(--ki-yellow)')
-                  : (isScrolled ? 'text-(--ki-black) hover:text-(--ki-secondary)' : 'text-white/70 hover:text-white')
+                  ? (shouldUseDarkTheme ? 'text-(--ki-yellow)' : 'text-(--ki-yellow)')
+                  : (shouldUseDarkTheme ? 'text-(--ki-black) hover:text-(--ki-secondary)' : 'text-white/70 hover:text-white')
               ]"
             >
               ES
@@ -152,24 +152,30 @@ export default {
     }
   },
   computed: {
+    isNotLanding() {
+      return this.$route && this.$route.path !== '/'
+    },
+    shouldUseDarkTheme() {
+      return this.isScrolled || this.isNotLanding
+    },
     headerClasses() {
-      return this.isScrolled
+      return this.shouldUseDarkTheme
         ? 'bg-white shadow-nav'
         : 'bg-gradient-to-b from-black/80 via-black/50 to-transparent'
     },
     currentLogo() {
-      return this.isScrolled ? this.logoDark : this.logoLight
+      return this.shouldUseDarkTheme ? this.logoDark : this.logoLight
     },
     logoClass() {
-      return this.isScrolled ? 'text-[var(--ki-black)]' : 'text-white'
+      return this.shouldUseDarkTheme ? 'text-[var(--ki-black)]' : 'text-white'
     },
     navLinkClass() {
-      return this.isScrolled
+      return this.shouldUseDarkTheme
         ? 'text-[var(--ki-black)] hover:text-[var(--ki-secondary)]'
         : 'text-white'
     },
     mobileButtonClass() {
-      return this.isScrolled ? 'text-[var(--ki-black)]' : 'text-white'
+      return this.shouldUseDarkTheme ? 'text-[var(--ki-black)]' : 'text-white'
     }
   },
   mounted() {
