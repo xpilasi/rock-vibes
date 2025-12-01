@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n'
 import { ref, watch, onMounted, computed } from 'vue'
-import { getNews } from '@/services/strapi'
+import { getNews, getGalleryImages } from '@/services/strapi'
 import gearImage from '@/assets/images/news/gear.jpg'
 import routesImage from '@/assets/images/news/routes.jpg'
 import trainingImage from '@/assets/images/news/training.jpg'
@@ -22,6 +22,11 @@ export function useI18nContent() {
   const newsItems = ref([])
   const newsLoading = ref(true)
   const newsError = ref(null)
+
+  // Estado reactivo para galería
+  const galleryImages = ref([])
+  const galleryLoading = ref(true)
+  const galleryError = ref(null)
 
   // Datos estáticos de fallback para noticias
   const staticNewsItems = [
@@ -120,9 +125,32 @@ export function useI18nContent() {
     }
   }
 
-  // Cargar noticias al montar el componente
+  // Función para cargar galería desde Strapi
+  const loadGallery = async () => {
+    galleryLoading.value = true
+    galleryError.value = null
+
+    try {
+      const data = await getGalleryImages()
+
+      if (data && data.length > 0) {
+        galleryImages.value = data
+      } else {
+        galleryImages.value = []
+      }
+    } catch (error) {
+      console.error('Error loading gallery from Strapi:', error)
+      galleryError.value = error
+      galleryImages.value = []
+    } finally {
+      galleryLoading.value = false
+    }
+  }
+
+  // Cargar noticias y galería al montar el componente
   onMounted(() => {
     loadNews()
+    loadGallery()
   })
 
   // Recargar noticias cuando cambie el idioma
@@ -294,16 +322,9 @@ export function useI18nContent() {
   const gallery = computed(() => ({
     title: t('gallery.title'),
     subtitle: t('gallery.subtitle'),
-    images: [
-      { id: 1, src: '/images/gallery-1.jpg', alt: 'Climbing 1' },
-      { id: 2, src: '/images/gallery-2.jpg', alt: 'Climbing 2' },
-      { id: 3, src: '/images/gallery-3.jpg', alt: 'Climbing 3' },
-      { id: 4, src: '/images/gallery-4.jpg', alt: 'Climbing 4' },
-      { id: 5, src: '/images/gallery-5.jpg', alt: 'Climbing 5' },
-      { id: 6, src: '/images/gallery-6.jpg', alt: 'Climbing 6' },
-      { id: 7, src: '/images/gallery-7.jpg', alt: 'Climbing 7' },
-      { id: 8, src: '/images/gallery-8.jpg', alt: 'Climbing 8' }
-    ]
+    images: galleryImages.value,
+    loading: galleryLoading.value,
+    error: galleryError.value
   }))
 
   const contact = computed(() => ({

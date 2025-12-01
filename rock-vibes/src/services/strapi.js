@@ -142,7 +142,24 @@ export const getGalleryImages = async () => {
         populate: '*'
       }
     })
-    return extractData(response)
+
+    // Transform gallery images data
+    const data = response.data.data
+
+    if (Array.isArray(data)) {
+      return data.map(item => ({
+        id: item.id,
+        documentId: item.documentId,
+        alt: item.alt,
+        category: item.category,
+        src: item.image?.url || null, // Get the direct URL from the image object
+        formats: item.image?.formats || {}, // Include all image formats for responsive images
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt
+      }))
+    }
+
+    return []
   } catch (error) {
     console.error('Error fetching gallery images:', error)
     throw error
