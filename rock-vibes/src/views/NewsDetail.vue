@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-(--ki-black)" style="padding-top: 100px;">
+  <div class="min-h-screen !bg-(--ki-dark-gray) !pt-16">
     <!-- Loading State -->
     <div v-if="loading" class="pb-12">
       <div class="container-custom">
@@ -38,100 +38,114 @@
     </div>
 
     <!-- News Content -->
-    <article v-else-if="newsItem" class="pb-16">
-      <!-- Article Header -->
-      <header class="container-custom mb-10">
-        <div class="max-w-4xl mx-auto">
-          <!-- Back Button -->
-          <router-link
-            to="/#news"
-            class="inline-flex items-center text-gray-400 hover:text-(--ki-yellow) font-body text-sm mb-6 transition-colors group"
-          >
-            <svg class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            {{ $t('news.backToNews') || 'Back to News' }}
-          </router-link>
-
-          <!-- Category Badge -->
-          <div v-if="newsItem.category" class="mb-6">
-            <span class="inline-block px-4 py-1.5 text-xs font-heading font-bold uppercase tracking-wider bg-(--ki-yellow) text-(--ki-black) rounded-full">
-              {{ newsItem.category }}
-            </span>
-          </div>
-
-          <!-- Title -->
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-5 leading-tight tracking-tight">
-            {{ newsItem.title }}
-          </h1>
-
-          <!-- Excerpt/Subtitle -->
-          <p v-if="newsItem.excerpt" class="text-lg md:text-xl text-gray-400 leading-relaxed mb-6 font-body">
-            {{ newsItem.excerpt }}
-          </p>
-
-          <!-- Article Meta -->
-          <ArticleMeta
-            :date="newsItem.date"
-            :reading-time="newsItem.readingTime"
-            :category="newsItem.category"
-            :author="newsItem.author"
+    <article v-else-if="newsItem" class="!pb-16 ">
+      <!-- Hero Image with Overlays -->
+      <div class="relative w-full mb-12">
+        <!-- Featured Image -->
+        <div class="w-full h-[50vh] min-h-[500px] max-h-[700px] overflow-hidden bg-gray-900">
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            :alt="newsItem.title"
+            class="w-full h-full object-cover"
+            @error="handleImageError"
+            @load="handleImageLoad"
           />
-        </div>
-      </header>
-
-      <!-- Featured Image -->
-      <div class="mb-12">
-        <figure class="w-full bg-gray-900">
-          <!-- Debug info -->
-          <div v-if="imageUrl" class="container-custom mb-2">
-            <div class="max-w-4xl mx-auto text-xs text-gray-600 font-mono">
-              Image URL: {{ imageUrl }}
+          <div v-else class="w-full h-full bg-gray-800 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-20 h-20 text-gray-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p class="text-gray-500 text-sm">No image available</p>
             </div>
           </div>
+        </div>
 
-          <div class="w-full overflow-hidden" style="max-height: 600px;">
-            <img
-              v-if="imageUrl"
-              :src="imageUrl"
-              :alt="newsItem.title"
-              class="w-full h-auto object-cover"
-              @error="handleImageError"
-              @load="handleImageLoad"
-            />
-            <div v-else class="w-full bg-gray-800 flex items-center justify-center" style="height: 400px;">
-              <div class="text-center">
-                <svg class="w-20 h-20 text-gray-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <!-- Gradient Overlay (black from bottom to top) -->
+        <div class="absolute inset-0 bg-gradient-to-t !from-(--ki-dark-gray) via-black/60 to-transparent pointer-events-none"></div>
+
+        <!-- Top Left: Back Button & Category Badge -->
+        <div class="absolute top-8 left-0 right-0 z-10">
+          <div class="container-custom">
+            <div class="flex items-center gap-4">
+              <!-- Back Button -->
+              <router-link
+                to="/#news"
+                class="inline-flex items-center text-white hover:text-(--ki-yellow) font-body text-sm transition-colors group backdrop-blur-sm bg-black/30 !px-3 !py-2 rounded-lg"
+              >
+                <svg class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <p class="text-gray-500 text-sm">No image available</p>
+                {{ $t('news.backToNews') || 'Back to News' }}
+              </router-link>
+
+              <!-- Category Badge -->
+              <span v-if="newsItem.category" class="inline-block !px-3 !py-2 text-sm font-heading font-bold uppercase tracking-wider bg-(--ki-yellow) text-(--ki-black) rounded-lg">
+                {{ newsItem.category }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom: Title, Author, Date, Reading Time -->
+        <div class="absolute bottom-0 left-0 right-0 z-10 pb-12">
+          <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+              <!-- Title -->
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight tracking-tight">
+                {{ newsItem.title }}
+              </h1>
+
+              <!-- Meta Info: Author, Date, Reading Time -->
+              <div class="flex flex-wrap items-center gap-4 text-white/90">
+                <!-- Author -->
+                <div v-if="newsItem.author" class="flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span class="font-body text-sm">{{ newsItem.author.name || 'Rock Vibes Team' }}</span>
+                </div>
+
+                <!-- Separator -->
+                <span v-if="newsItem.author" class="text-white/50">•</span>
+
+                <!-- Date -->
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <time class="font-body text-sm">{{ formattedDate }}</time>
+                </div>
+
+                <!-- Separator -->
+                <span class="text-white/50">•</span>
+
+                <!-- Reading Time -->
+                <div v-if="newsItem.readingTime" class="flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span class="font-body text-sm">{{ newsItem.readingTime }} min read</span>
+                </div>
               </div>
             </div>
           </div>
-          <figcaption v-if="newsItem.featuredImageCaption || newsItem.featuredImageCredit" class="container-custom mt-4">
-            <div class="max-w-4xl mx-auto text-sm text-gray-500 font-body">
-              <span v-if="newsItem.featuredImageCaption">{{ newsItem.featuredImageCaption }}</span>
-              <span v-if="newsItem.featuredImageCredit" class="text-gray-600">
-                <span v-if="newsItem.featuredImageCaption"> • </span>{{ newsItem.featuredImageCredit }}
-              </span>
-            </div>
-          </figcaption>
-        </figure>
+        </div>
       </div>
 
       <!-- Article Body -->
-      <div class="container-custom">
-        <div class="max-w-3xl mx-auto">
+      <div class="container-custom !mt-12">
+        <div class="">
           <ArticleBody :content="newsItem.content || newsItem.excerpt" class="mb-12" />
 
           <!-- Tags -->
           <ArticleTags v-if="newsItem.tags && newsItem.tags.length" :tags="newsItem.tags" class="mb-12" />
 
           <!-- Author -->
-          <ArticleAuthor v-if="newsItem.author" :author="newsItem.author" class="mb-12" />
+          <ArticleAuthor v-if="newsItem.author" :author="newsItem.author" class="mb-12 !mt-12" />
 
           <!-- Footer Actions -->
-          <footer class="mt-16 pt-8 border-t border-gray-800">
+          <!-- <footer class="mt-16 pt-8 border-t border-gray-800">
             <div class="flex items-center justify-between">
               <router-link
                 to="/#news"
@@ -143,7 +157,7 @@
                 </svg>
               </router-link>
             </div>
-          </footer>
+          </footer> -->
         </div>
       </div>
     </article>

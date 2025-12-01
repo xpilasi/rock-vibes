@@ -1,9 +1,9 @@
 <template>
-  <div v-if="author" class="article-author border-t border-gray-800 pt-8 mt-8">
-    <h3 class="text-sm font-heading font-semibold uppercase tracking-wider text-gray-500 mb-6">
+  <div v-if="author" class="article-author border-t border-b border-gray-800 !pt-3 !pb-3 mt-8">
+    <h3 class="text-sm font-heading font-semibold uppercase tracking-wider text-gray-500 !mb-2 ">
       About the Author
     </h3>
-    <div class="flex items-start gap-6 bg-gray-900 border border-gray-800 rounded-xl p-6">
+    <div class="flex items-start gap-6  rounded-xl p-6">
       <!-- Avatar -->
       <div class="flex-shrink-0">
         <div v-if="author.avatar" class="w-20 h-20 rounded-full overflow-hidden ring-2 ring-gray-800">
